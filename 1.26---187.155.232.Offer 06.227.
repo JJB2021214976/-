@@ -1,0 +1,99 @@
+------1.26------
+1.26-2.25 30天200道，放7天休息，每天完成至少10道题
+今日完成题目：10
+假期刷题总进度：
+
+知识点总结
+1.187. 重复的DNA序列
+方法一：Hashmap  
+  # 创建Hashmap
+  seq_dict = defaultdict(int)
+  # 取循环，遍历哈希，每个s[i:i+L]的数量+1，一旦等于2就可认为重复（理解为什么不用>=2）
+  seq_dict[s[i:i+L]] += 1
+方法二：哈希表+位运算
+
+2.155.最小栈
+  self.stack = []
+  self.min_stack = [math.inf]
+  # 创建辅助最小栈存储当前top时所有值的最小值
+  def push(self, x: int) -> None:
+  self.stack.append(x)
+        self.min_stack.append(min(x, self.min_stack[-1]))
+  # 获取栈顶即为所求
+  def getMin(self) -> int:
+  		return self.min_stack[-1]
+		
+        
+3.232. 用栈实现队列
+  def pop(self) -> int:
+    # 需要弹出时，记下pop的r，并对两栈做相应修改
+    while len(self.stack) != 1:
+        self.stack2.append(self.stack.pop())
+    # 上面先在辅助栈中记录好上面的元素，下面再弹出最后一个元素方便输出
+    r = self.stack.pop()
+    # 重新从辅助栈弹回原栈去
+    while len(self.stack2) != 0:
+        self.stack.append(self.stack2.pop())
+    return r
+    # 显示栈顶
+  def peek(self) -> int:
+  		return self.stack[0]
+    
+4.剑指 Offer 06. 从尾到头打印链表
+	# 入栈： 遍历链表，将各节点值 push 入栈。使用 append() 方法
+	# 出栈： 将各节点值 pop 出栈，存储于数组并返回。直接返回 stack 的倒序列表stack[::-1]
+	# head是指针(p.next)，直到指到空。head.val是当前值(*p)
+	stack = []
+	while head:
+		stack.append(head.val)
+		head = head.next
+	return stack[::-1]
+		
+5.227. 基本计算器 II
+	# 用变量preSign记录每个数字之前的运算符
+	preSign = '+'
+	# 使用循环遍历字符串
+	# 处理数字
+	if s[i] != ' ' and s[i].isdigit():
+		# ord取Ascll码,差值为当前数字int
+		num = num * 10 + ord(s[i]) - ord('0')
+	# 处理运算
+	if i == n - 1 or s[i] in '+-*/':
+		if preSign == '+':
+			stack.append(num)
+		# 遇到*/分别将栈顶元素计算后重压入
+		elif preSign == '*':
+			stack.append(stack.pop() * num)
+
+6.
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
