@@ -1,0 +1,45 @@
+------1.26------
+1.26-2.25 30天200道，放7天休息，每天完成至少10道题
+今日完成题目：10
+假期刷题总进度：
+
+知识点总结
+1-144.94.145 二叉树的前、中、后序遍历
+### 参考题解：144图解 二叉树的四种遍历  腐烂的橘子 ###
+   {前：中左右
+    中：左中右
+    后：左右中}
+# 递归方法模板（基础！这里是面向对象方法）：
+  class Solution:
+    def inorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+        ans = []
+        self.dfs(root,ans)
+        return ans
+        
+    def dfs(self,root,ans):
+        if not root:return       # 递归终止条件
+        
+        # 左中右，中序遍历
+        self.dfs(root.left,ans)  # 递归遍历左子树
+        ans.append(root.val)     # 保存当前值，中
+        self.dfs(root.right,ans) # 递归遍历右子树
+        
+        
+2-589.590 N叉树（前、后遍历）
+  # 这里是面向过程的方法，也可以面向对象来调用DFS
+  class Solution:
+      def preorder(self, root: 'Node') -> List[int]:
+          #前序遍历
+          def DFS(root):
+              if root:
+                  ans.append(root.val)
+                  for i in range(len(root.children)):
+                      DFS(root.children[i])
+                  # 前序，中左右，这里的循环也可以如下直接用指针
+                  # for node in root.children:
+                  #     DFS(node)
+          ans = []
+          DFS(root)
+          return ans
+
+3-
