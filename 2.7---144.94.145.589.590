@@ -1,7 +1,7 @@
-------1.26------
+------2.7------
 1.26-2.25 30天200道，放7天休息，每天完成至少10道题
-今日完成题目：10
-假期刷题总进度：
+今日完成题目：5
+假期刷题总进度：10
 
 知识点总结
 1-144.94.145 二叉树的前、中、后序遍历
@@ -9,7 +9,7 @@
    {前：中左右
     中：左中右
     后：左右中}
-# 递归方法模板（基础！这里是面向对象方法）：
+# 递归方法模板（基础！这里是面向对象方法，创建函数）：
   class Solution:
     def inorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
         ans = []
@@ -24,6 +24,23 @@
         ans.append(root.val)     # 保存当前值，中
         self.dfs(root.right,ans) # 递归遍历右子树
         
+# 迭代方法模板（循环解决）
+   # 前序如下。中序时ans.append放在tmp赋值行的后面。后序时跟前序反过来（right和left），先到达最右端，同时采用反向输出ans[::-1]。
+   class Solution:
+    def preorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+        if not root: return []
+        cur, stack, ans = root, [], []
+        while cur or stack:         
+            while cur:              # 关键循环cur。把所有左都放进去栈后，大循环用栈弹出当前节点并一层一层调出右树。左可以到底，但stack直到最后才为空
+                ans.append(cur.val) # 前序遍历，遍历时就放进ans（前左右，左直接放）
+                stack.append(cur)   # cur进栈，待取右子树
+                cur = cur.left      # 一直遍历左，遍历到底，并全部进栈，到最左下角，cur.left为空，下一步弹出cur并开始取right，取出cur.right后接着原步骤
+            tmp = stack.pop()       # 一直进左，直到全进栈，开始大循环。弹出一个作为tmp并访问他的右，再一直向左到底。就是这个顺序，过程中遍历到谁谁就放进ans
+            # 中序在这里ans.append(tmp.val)
+            cur = tmp.right
+        return ans
+  
+  
         
 2-589.590 N叉树（前、后遍历）
   # 这里是面向过程的方法，也可以面向对象来调用DFS
@@ -42,4 +59,4 @@
           DFS(root)
           return ans
 
-3-
+
