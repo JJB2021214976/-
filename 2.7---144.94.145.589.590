@@ -39,8 +39,33 @@
             # 中序在这里ans.append(tmp.val)
             cur = tmp.right
         return ans
-  
-  
+
+# 迭代法常规方法
+    # 前序
+    class Solution:
+        def preorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+            if not root: return []
+            stack, ans = [root], []
+            while stack:         
+                node = stack.pop()
+                if node:
+                   res.append(node.val)         # 根节点值加入到结果中
+                   if node.right:               # 右子树入栈。先右后左保证栈顶先加入结果的是左
+                      stack.append(node.right)
+                   if node.left:                # 左子树入栈
+                      stack.append(node.left)
+             return res
+    # 后序可采用标记法
+            stack = [(0, root)]
+            while stack:
+                flag, node = stack.pop()
+                if flag == 1:# 遍历过了再加入到结果
+                    res.append(node.val)
+                else:
+                    stack.append((1, node))
+                    stack.append((0, node.right))
+                    stack.append((0, node.left))
+
         
 2-589.590 N叉树（前、后遍历）
   # 这里是面向过程的方法，也可以面向对象来调用DFS
