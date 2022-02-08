@@ -1,0 +1,25 @@
+ ------2.8------
+1.26-2.25 30天200道，放7天休息，每天完成至少10道题
+今日完成题目：1
+假期刷题总进度：10
+
+知识点总结
+
+1-315. 计算右侧小于当前元素的个数(困难)
+    if not nums: return []
+    sorted_nums = []
+    ans = []
+    # 按逆序读，把当前数右侧所有数按正序排好，取bisect_left，得到坐标为比它小的个数index。取左是因为相同的不算。
+    for n in nums[::-1]:
+        index = bisect.bisect_left(sorted_nums,n)
+        bisect.insort(sorted_nums,n)
+        ans.append(index)
+    # 逆序输出
+    return ans[::-1]
+
+    # bisect 模块:保持序列 sequence 顺序不变 的情况下对其进行 二分查找和插入。也可以以空间换时间,构造 hashmap 的 Counter 类。
+      bisect.bisect_left(list, 6, start, end)
+      查找：bisect_left()	查找目标元素左侧插入点（相同的时候往左插，返回index）。 bisect()同bisect_right()
+      插入：insort_left()	查找目标元素左侧插入点并保序地插入元素。insort()同insort_right()，真正插入时放左放右不影响。
+
+2-
