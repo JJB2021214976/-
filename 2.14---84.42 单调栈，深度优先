@@ -4,6 +4,14 @@
 假期刷题总进度：
 
 知识点总结
+
+# 单调栈模板：
+def monotoneIncreasingStack(nums):
+    stack = []
+    for num in nums:
+        while stack and num >= stack[-1]:
+            stack.pop()
+
 1-84. 柱状图中最大的矩形（困难）
   # 找两边第一个小于它的值
   # 1.暴力法，对每个节点向左右找第一个最小值
@@ -32,3 +40,4 @@
 3.双指针。优化空间，leftmax，rightmax即算即更新
 4.单调栈。按照入栈顺序依次找left，top，i，算的时候top要弹出，i左边算完之前一直在while，算完以后栈里只剩i
 
+        stack.append(num)
