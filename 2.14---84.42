@@ -1,0 +1,34 @@
+ ------2.14------
+1.26-2.25 30天200道，放7天休息，每天完成至少10道题
+今日完成题目：2
+假期刷题总进度：
+
+知识点总结
+1-84. 柱状图中最大的矩形（困难）
+  # 找两边第一个小于它的值
+  # 1.暴力法，对每个节点向左右找第一个最小值
+  while left_i >= 0 and heights[left_i] >= heights[i]:
+    left_i -= 1
+  # 2. 单调栈
+  class Solution:
+    def largestRectangleArea(self, heights: List[int]) -> int:
+        ans = 0
+        stack = []
+        heights = [0] + heights + [0]  # 处理后不用考虑边界特殊情况，否则判断栈不空才能比较大小。
+        for i in range(len(heights)):
+            # 这些柱子具有最近相关性，所以使用栈保存这些有序的柱子。(栈中元素为柱子的序号i而不是高度！)
+            while stack and heights[i] < heights[stack[-1]]:
+            
+                h = heights[stack[-1]]
+                stack.pop()
+                w = i - stack[-1] - 1
+                ans = max(h*w, ans)
+            stack.append(i)
+        return ans
+
+2-42. 接雨水（困难）
+# 1.暴力。遍历每个下标的位置的左右两侧最大高度的较小值，即为当前下标处水深，n^2复杂度 
+2.动态规划。求每个位置的leftmax，rightmax数组
+3.双指针。优化空间，leftmax，rightmax即算即更新
+4.单调栈。按照入栈顺序依次找left，top，i，算的时候top要弹出，i左边算完之前一直在while，算完以后栈里只剩i
+
